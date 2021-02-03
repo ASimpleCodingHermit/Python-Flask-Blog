@@ -24,7 +24,7 @@ posts = [
 @app.route("/")
 @app.route('/home')
 def home():
-    return render_template('home.html', posts=posts)
+    return render_template('home.html', title='Home', posts=posts)
 
 
 @app.route("/about")
@@ -36,14 +36,20 @@ def about():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        flash(f'Account created for {form.username.data}!', 'success')
-        return redirect(url_for('flask.home'), code=307)
+        flash('Account created!', 'success')
+        return redirect(url_for('home'))
     return render_template('register.html', title='Register', form=form)
 
 
-@app.route("/login")
+@app.route("/login", methods=['GET', 'POST'])
 def login():
     form = LoginForm()
+    if form.validate_on_submit():
+        if form.email.data == 'admin@blogster.com' and form.password.data == 'password':
+            flash('You have been logged in!', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash('Login unsuccessful. Check username and password', 'danger')
     return render_template('login.html', title='Login', form=form)
 
 
