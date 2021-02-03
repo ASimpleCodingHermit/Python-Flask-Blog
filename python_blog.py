@@ -1,8 +1,9 @@
 from flask import Flask, render_template, url_for, flash, redirect
 from forms import RegistrationForm, LoginForm
+from wtforms.validators import Email
 app = Flask(__name__)
 
-app.config['SECRET_KEY']='1b259870436a179cf073be94cfb612f5'
+app.config['SECRET_KEY'] = '1b259870436a179cf073be94cfb612f5'
 
 posts = [
     {
@@ -21,6 +22,7 @@ posts = [
 
 
 @app.route("/")
+@app.route('/home')
 def home():
     return render_template('home.html', posts=posts)
 
@@ -35,8 +37,9 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         flash(f'Account created for {form.username.data}!', 'success')
-        return redirect(url_for('home'))
+        return redirect(url_for('home'), code=307)
     return render_template('register.html', title='Register', form=form)
+
 
 @app.route("/login")
 def login():
