@@ -1,10 +1,25 @@
+from enum import unique
 from flask import Flask, render_template, url_for, flash, redirect
 from flask_sqlalchemy import SQLAlchemy
 from forms import RegistrationForm, LoginForm
 from wtforms.validators import Email
-app = Flask(__name__)
 
+app = Flask(__name__)
 app.config['SECRET_KEY'] = '1b259870436a179cf073be94cfb612f5'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+db = SQLAlchemy(app) 
+
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(20), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    image_file = db.Column(db.String(20), nullable=False, default='default.jpg')
+    password = db.Column(db.String(60), nullable=False)
+    
+    def __repr__(self):
+        return f"User('{self.username}','{self.email}','{self.image_file}')"
+    
 
 posts = [
     {
