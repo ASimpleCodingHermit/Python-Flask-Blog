@@ -1,5 +1,7 @@
 from datetime import datetime
 from pythonblog import db
+from sqlalchemy.orm import backref
+from enum import unique
 
 
 class User(db.Model):
@@ -28,4 +30,3 @@ class Post(db.Model):
 
     def __repr__(self):
         return f"Post('{self.title}','{self.date_posted}')"
-

@@ -1,16 +1,8 @@
-from enum import unique
-from flask import Flask, render_template, url_for, flash, redirect
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import backref
-from forms import RegistrationForm, LoginForm
+from flask import render_template, url_for, flash, redirect
+from pythonblog import app
+from pythonblog.forms import RegistrationForm, LoginForm
 from wtforms.validators import Email
-from models import User, Post
-
-
-app = Flask(__name__)
-app.config['SECRET_KEY'] = '1b259870436a179cf073be94cfb612f5'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
-db = SQLAlchemy(app)
+from pythonblog.models import User, Post
 
 
 posts = [
@@ -60,6 +52,3 @@ def login():
             flash('Login unsuccessful. Check username and password', 'danger')
     return render_template('login.html', title='Login', form=form)
 
-
-if __name__ == '__main__':
-    app.run(debug=True)
