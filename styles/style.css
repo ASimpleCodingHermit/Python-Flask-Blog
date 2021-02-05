@@ -11,15 +11,17 @@ h5,
 h6 {
   color: #444;
 }
+
 .bg-steel {
   background-color: #3e505e;
 }
 
 .site-header .nav-navbar .nav-link {
   color: #cbd5db;
-  &:hover {
-    color: #fff;
-  }
+}
+
+.site-header .nav-navbar .nav-link:hover {
+  color: #fff;
 }
 
 .site-header .navbar-nav .nav-link.active {
@@ -36,12 +38,11 @@ h6 {
 
 .article-title {
   color: #444444;
-  a {
-    &:hover {
-      color: #428bca;
-      text-decoration: none;
-    }
-  }
+}
+
+.article-title a:hover {
+  color: #428bca;
+  text-decoration: none;
 }
 
 .article-content {
@@ -58,10 +59,11 @@ h6 {
   padding-bottom: 1px;
   margin-bottom: 4px;
   border-bottom: 1px solid #e3e3e3;
-  &:hover {
-    color: #333;
-    text-decoration: none;
-  }
+}
+
+.article-metadata:hover {
+  color: #333;
+  text-decoration: none;
 }
 
 .article-svg {
@@ -80,3 +82,4 @@ h6 {
 .account-heading {
   font-size: 2.5rem;
 }
+/*# sourceMappingURL=style.css.map */
